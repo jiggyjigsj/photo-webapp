@@ -26,7 +26,8 @@ RUN apk add --update --no-cache \
       openssl \
       pkgconfig \
       tzdata \
-      sqlite-dev
+      sqlite-dev \
+      nodejs
 
 RUN gem install bundler
 # -v 2.2.3

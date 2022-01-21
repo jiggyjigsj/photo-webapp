@@ -2,8 +2,14 @@
 
 set -e
 
-if [ -f tmp/pids/server.pid ]; then
-  rm tmp/pids/server.pid
-fi
+if [[ "$1" ]]; then
+  echo "Running: $@"
+  eval "$@"
+else
 
-bundle exec rails s -b 0.0.0.0
+  if [ -f tmp/pids/server.pid ]; then
+    rm tmp/pids/server.pid
+  fi
+
+  bundle exec rails s -b 0.0.0.0
+fi

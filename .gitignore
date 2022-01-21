@@ -1,6 +1,7 @@
 *.lock
 *.gem
 *.rbc
+log
 /.config
 /coverage/
 /InstalledFiles
@@ -10,6 +11,7 @@
 /test/tmp/
 /test/version_tmp/
 /tmp/
+/db/development.sqlite3
 
 # Used by dotenv library to load environment variables.
 # .env
@@ -55,3 +57,4 @@ build-iPhoneSimulator/
 
 # Used by RuboCop. Remote config files pulled in from inherit_from directive.
 # .rubocop-https?--*
+log/development.log
