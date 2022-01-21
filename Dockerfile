@@ -27,7 +27,9 @@ RUN apk add --update --no-cache \
       pkgconfig \
       tzdata \
       sqlite-dev \
-      nodejs
+      nodejs \
+      postgresql \
+      postgresql-dev
 
 RUN gem install bundler
 # -v 2.2.3

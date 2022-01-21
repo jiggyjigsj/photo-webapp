@@ -1,0 +1,15 @@
+<h1>Welcome <%= @name %></h1>
+
+<form action="/" method="post">
+  <label>Username: <input type="text" name="username" required value="JohnDoe"></label>
+  <br>
+  <label>Password: <input type="password" name="password" required value="1234567890"></label>
+  <br>
+  <label>Name: <input type="text" name="name" required value="<%= @name %>"></label>
+  <br>
+  <label>Email: <input type="text" name="email" required value="<%= @email %>"></label>
+  <br>
+  <label>Phone Number: <input type="text" name="phone" required value="<%= @phone %>"></label>
+  <br>
+  <input type="submit" value="Submit">
+</form>

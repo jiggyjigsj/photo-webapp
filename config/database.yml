@@ -10,8 +10,15 @@ default: &default
   timeout: 5000
 
 development:
-  <<: *default
-  database: db/development.sqlite3
+  adapter: <%= ENV.fetch("RAILS_ADAPTER") { sqlite3 } %>
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+  database: <%= ENV.fetch("RAILS_DB") { db/development.sqlite3 } %>
+  username: <%= ENV.fetch("RAILS_DB_USERNAME") { nil } %>
+  password: <%= ENV.fetch("RAILS_DB_PASSWORD") { nil } %>
+  host: <%= ENV.fetch("RAILS_DB_HOST") { nil } %>
+  port: <%= ENV.fetch("RAILS_DB_PORT") { nil } %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
