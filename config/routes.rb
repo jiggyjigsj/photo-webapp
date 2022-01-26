@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   resource :index, to: 'index#view'
 
+  match '/', to: 'index#view', via: 'get'
   match '/', to: 'index#job', via: 'post'
 
   # Healthcheck to be utilized.
@@ -14,7 +15,11 @@ Rails.application.routes.draw do
   ## Sessions
   match '/login', to: 'sessions#view', via: 'get'
   match '/login', to: 'sessions#create', via: 'post'
-  match '/login', to: 'sessions#destroy’', via: 'get'
+  match '/logout', to: 'sessions#destroy', via: 'get'
+
+  ## Contacts
+  match '/contacts', to: 'contacts#view', via: 'get'
+  match '/contacts', to: 'contacts#job', via: 'post'
 
   ## Signup
   match '/signup', to: 'signup#view', via: 'get'

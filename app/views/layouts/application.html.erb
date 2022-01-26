@@ -11,6 +11,68 @@
   </head>
 
   <body>
-    <%= yield %>
+    <div class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">Photos</a>
+        <a class="navbar-brand"> Welcome <%= @name %></a>
+        <% for a in 1..30 do %>
+        <a class="navbar-brand"></a>
+        <% end %>
+        <% if @name %>
+        <a href="/logout" class="navbar-brand" style="float:right">Logout</a>
+        <a href="/contacts" class="navbar-brand" style="float:right">Profile</a>
+        <% else %>
+        <a href="/login" class="navbar-brand" style="float:right">Signin</a>
+        <a href="/signup" class="navbar-brand" style="float:right">Signup</a>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="container">
+    <br>
+    <br>
+    <br>
+    </div>
+
+    <%# TODO: Figure out why i can't close these damn alerts.  Probably javascript not invoking! %>
+    <%# <div class="col-lg-4">
+        <div class="bs-component">
+          <div class="alert alert-dismissible alert-info">
+            <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+          </div>
+        </div>
+      </div>
+    </div> %>
+
+    <div class="container">
+      <div class="page-header" id="banner">
+        <div class="bs-component">
+          <div class="list-group">
+            <a class="list-group-item list-group-item-action flex-column align-items-start active">
+              <h1>Photonic</h1>
+              <p class="lead">A stab at learning new things</p>
+            </a>
+            <div class="list-group-item list-group-item-action flex-column align-items-start">
+              <div class="card-body">
+              <% if @name %>
+                <%= yield %>
+              <% elsif @login %>
+                <%= yield %>
+              <% else %>
+                <div class="col-lg-4">
+                  <div class="bs-component">
+                    <div class="alert alert-danger">
+                      <strong>401! Oh you think you Sneaky! Login first then I show you what's under this ;) <strong>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

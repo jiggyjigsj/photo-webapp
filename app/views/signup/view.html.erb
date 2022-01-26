@@ -1,15 +1,22 @@
-<h2> Welcome to Photos app! </h2>
-<h3> Lets get you signed up. </h3>
-<form action="signup" method="post">
-  <label>Username: <input type="text" name="username" required value="JohnDoe"></label>
-  <br>
-  <label>Password: <input type="password" name="password" required value="1234567890"></label>
-  <br>
-  <label>Name: <input type="text" name="name" required value="John Doe"></label>
-  <br>
-  <label>Email: <input type="text" name="email" required value="John.doe@email.com"></label>
-  <br>
-  <label>Phone Number: <input type="text" name="phone" required value="2244433343"></label>
+<h3>Lets get you signed up</h3>
+<form action="/signup" method="post">
+  <div class="form-group">
+    <fieldset>
+      <label>Username<input class="form-control" type="text" name="username" required value="JohnDoe"></label>
+    </fieldset>
+    <fieldset>
+      <label>Password<input class="form-control" type="text" name="password" required value="1234567890"></label>
+    </fieldset>
+    <fieldset>
+      <label> Name <input class="form-control" type="text" name="name" required value="John Doe"></label>
+    </fieldset>
+    <fieldset>
+      <label>Email<input class="form-control" type="text" name="email" required value="John.doe@email.com"></label>
+    </fieldset>
+    <fieldset>
+      <label>Phone<input class="form-control" type="text" name="phone" required value="2244433343"></label>
+    </fieldset>
+  </div>
   <br>
   <input type="submit" value="Submit">
 </form>

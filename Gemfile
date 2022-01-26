@@ -78,4 +78,9 @@ end
 # gem 'coffee-script'
 # gem 'msgpack'
 
-# gem "bootswatch", github: "thomaspark/bootswatch"
+gem "bootswatch", github: "thomaspark/bootswatch"
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'jquery'
+gem 'google-cloud-storage'
+# gem "semantic-ui-sass"

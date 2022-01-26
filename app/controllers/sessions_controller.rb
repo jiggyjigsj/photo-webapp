@@ -1,5 +1,6 @@
 class SessionsController < ApplicationController
   def view
+    @login = true
   end
 
   def create

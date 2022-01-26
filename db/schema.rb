@@ -10,10 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_01_21_035738) do
+ActiveRecord::Schema.define(version: 2022_01_26_030535) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "photos", force: :cascade do |t|
+    t.string "uuid"
+    t.string "username"
+    t.integer "uid"
+    t.string "generated_path"
+    t.string "original_path"
+    t.datetime "init_date"
+    t.datetime "fin_date"
+    t.string "qid"
+    t.boolean "completed"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["uuid"], name: "index_photos_on_uuid", unique: true
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "username"
@@ -26,4 +41,6 @@ ActiveRecord::Schema.define(version: 2022_01_21_035738) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
 end

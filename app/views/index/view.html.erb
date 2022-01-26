@@ -1,15 +1,26 @@
-<h1>Welcome <%= @name %></h1>
+<script>
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
 
-<form action="/" method="post">
-  <label>Username: <input type="text" name="username" required value="JohnDoe"></label>
-  <br>
-  <label>Password: <input type="password" name="password" required value="1234567890"></label>
-  <br>
-  <label>Name: <input type="text" name="name" required value="<%= @name %>"></label>
-  <br>
-  <label>Email: <input type="text" name="email" required value="<%= @email %>"></label>
-  <br>
-  <label>Phone Number: <input type="text" name="phone" required value="<%= @phone %>"></label>
-  <br>
-  <input type="submit" value="Submit">
+      reader.onload = function (e) {
+        $('#img_prev')
+          .attr('src', e.target.result)
+          .width(275)
+          .height(375);
+      };
+
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+</script>
+
+<h1>Lets upload a new image!</h1>
+<form action="/" method="post" enctype="multipart/form-data">
+  <div class="form-group">
+    <img id="img_prev" src="#" alt="" />
+    <fieldset>
+      <input type='file' accept="image/*" name="image" onchange="readURL(this);" />
+    </fieldset>
+    <input type="submit">
 </form>
