@@ -83,4 +83,5 @@ gem 'bootstrap'
 gem 'jquery-rails'
 gem 'jquery'
 gem 'google-cloud-storage'
+gem 'google-cloud-pubsub'
 # gem "semantic-ui-sass"
