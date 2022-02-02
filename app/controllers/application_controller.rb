@@ -1,4 +1,5 @@
 require "google/cloud/storage"
+require "google/cloud/pubsub"
 
 class ApplicationController < ActionController::Base
   def current_user
@@ -18,6 +19,18 @@ class ApplicationController < ActionController::Base
         credentials: ENV.fetch("GCP_CREDENTIALS_FILE")
       )
       storage.bucket bucket
+    rescue => e
+      raise "Looks like your bucket doesn't exists or your credentials are wrong!"
+    end
+  end
+
+  def gcp_pub_sub(topic)
+    begin
+      pubsub = Google::Cloud::PubSub.new(
+        project_id: ENV.fetch("GCP_PROJECT_ID"),
+        credentials: ENV.fetch("GCP_CREDENTIALS_FILE")
+      )
+      pubsub.topic topic
     rescue => e
       raise "Looks like your bucket doesn't exists or your credentials are wrong!"
     end

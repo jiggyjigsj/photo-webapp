@@ -1,8 +1,5 @@
 FROM ruby:alpine
 
-ENV BUNDLER_VERSION=2.2.3
-ENV API_PATH=/get/abc
-
 EXPOSE 3000
 
 RUN apk add --update --no-cache \
@@ -29,7 +26,8 @@ RUN apk add --update --no-cache \
       sqlite-dev \
       nodejs \
       postgresql \
-      postgresql-dev
+      postgresql-dev \
+      imagemagick
 
 RUN gem install bundler
 # -v 2.2.3

@@ -1,8 +1,10 @@
 #!/bin/sh
 
 set -e
-
-if [[ "$1" ]]; then
+if [[ "$1" == "worker" ]]; then
+  source .env
+  bundle exec bundle exec ruby worker/worker.rb
+elif [[ "$1" ]]; then
   echo "Running: $@"
   eval "$@"
 else
