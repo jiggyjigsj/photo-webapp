@@ -1,0 +1,25 @@
+.toast-body {
+  display: flex;
+}
+
+.flex-child {
+  flex: 1;
+  border: 2px solid yellow;
+}
+
+.flex-child:first-child {
+  margin-right: 20px;
+}
+
+.multi-rows {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+}
+
+.ind-images {
+  flex: 33%;
+  padding: 0 4px;
+  margin-top: 8px;
+  vertical-align: middle;
+}

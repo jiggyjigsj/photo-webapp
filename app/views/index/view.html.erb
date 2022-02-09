@@ -14,6 +14,9 @@
     }
   }
 </script>
+<head>
+  <%= stylesheet_link_tag "index", "data-turbo-track": "reload" %>
+</head>
 
 <h1>Lets upload a new image!</h1>
 <form action="/" method="post" enctype="multipart/form-data">
@@ -22,5 +25,30 @@
     <fieldset>
       <input type='file' accept="image/*" name="image" onchange="readURL(this);" />
     </fieldset>
-    <input type="submit">
+    <button type="submit" class="btn btn-info">Upload</button>
 </form>
+
+<div class="bs-component">
+<div class="multi-rows">
+  <% if @images %>
+    <% @images.each do |img| %>
+      <div class="ind-images">
+        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <strong class="me-auto">Job ID: <%=img[:id]%></strong>
+            <small><%=img[:time]%> mins ago</small>
+          </div>
+          <div class="toast-body">
+            <div class="toast-child">
+              <img src="<%=img[:pre]%>" width="150" height="150">
+            </div>
+            <div class="toast-child">
+              <img src="<%=img[:post]%>" width="150" height="150">
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+</div>

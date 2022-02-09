@@ -23,3 +23,6 @@ source .env && rails generate model photos uuid:string:uniq username:string uid:
     1. Create a Service account and assign to Role.
     1. Visit: https://console.cloud.google.com/iam-admin/serviceaccounts
     1. TODO: Add additional access
+
+    1. Make sure you bucket is publicly reachable
+        https://cloud.google.com/storage/docs/access-control/making-data-public#buckets
