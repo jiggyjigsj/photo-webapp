@@ -6,8 +6,8 @@ class ContactsController < ApplicationController
       @email = current_user.email
       @phone = current_user.phone
     else
-      flash[:warning] = "You must be logged in to see this page"
-      redirect_to '/contacts'
+      flash[:warning] = 'You must be logged in to see this page'
+      redirect_to '/login'
     end
   end
 

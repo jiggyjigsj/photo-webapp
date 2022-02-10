@@ -8,6 +8,9 @@
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -33,17 +36,33 @@
     <br>
     <br>
     </div>
+    <style>
+    .bs-component .alert {
+        position: fixed:right;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        z-index:9999;
+    }
+    </style>
 
-    <%# TODO: Figure out why i can't close these damn alerts.  Probably javascript not invoking! %>
-    <%# <div class="col-lg-4">
-        <div class="bs-component">
-          <div class="alert alert-dismissible alert-info">
-            <strong>Heads up!</strong> This <a href="#" class="alert-link">alert needs your attention</a>, but it's not super important.
-            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    <% flash.each do |key, value| %>
+      <% next unless value%>
+      <% alert_class = case key
+                      when :notice then "success"
+                      when :alert then "danger"
+                      else key
+                      end %>
+        <div class="col-lg-4">
+          <div class="bs-component">
+            <div class="alert alert-dismissible alert-<%=alert_class%>">
+              <strong><%=alert_class.upcase%></strong> <%= value %>
+              <button type="button" class="btn-close" data-dismiss="alert"></button>
+            </div>
           </div>
         </div>
-      </div>
-    </div> %>
+    <% end %>
+    <% flash.discard %> <% flash[:notice] = nil %> <% flash[:warning] = nil %>
 
     <div class="container">
       <div class="page-header" id="banner">
@@ -57,16 +76,12 @@
               <div class="card-body">
               <% if @name %>
                 <%= yield %>
-              <% elsif @login %>
+              <% elsif @view_page %>
                 <%= yield %>
               <% else %>
-                <div class="col-lg-4">
-                  <div class="bs-component">
-                    <div class="alert alert-danger">
-                      <strong>401! Oh you think you Sneaky! Login first then I show you what's under this ;) <strong>
-                    </div>
-                  </div>
-                </div>
+                <h3>Looks like you are lost! Lets get your logged in!</h3><br>
+                <a class="btn btn-success btn-lg" href="/login" class="btn btn-primary">Lets Login!</a>
+                <a class="btn btn-info btn-lg" href="/signup" class="btn btn-primary">Ohh you need an account?</a>
               <% end %>
               </div>
             </div>

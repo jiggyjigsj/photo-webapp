@@ -1,5 +1,6 @@
 class SignupController < ApplicationController
   def view
+    @view_page = true
   end
 
   def job

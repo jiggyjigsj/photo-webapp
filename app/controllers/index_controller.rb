@@ -1,6 +1,5 @@
 class IndexController < ApplicationController
   def view
-    flash[:warning] = "You must be logged in to see this page"
     if current_user
       @id = current_user.id
       @name = current_user.name
@@ -21,16 +20,15 @@ class IndexController < ApplicationController
         })
       end
     else
-      # flash[:warning] = "You must be logged in to see this page"
+      # flash[:warning] = 'You must be logged in to see this page'
       # redirect_to '/login'
     end
-    flash.now[:notice] = "We have exactly 2 books available."
-    flash.keep
   end
 
   def job
     time_now = Time.now
     bucket_name = ENV.fetch("GCP_CLOUD_STORAGE_BUCKET")
+    pub_sub = ENV.fetch("GCP_CLOUD_PUB_SUB")
     uid = SecureRandom.hex(7)
 
     img = params["image"].read
@@ -39,17 +37,29 @@ class IndexController < ApplicationController
     uid_file = "#{uid}_org#{ext}"
     uid_path = File.join('/tmp', uid_file )
 
-    upload_path = File.join('photonic', current_user.username , uid_file )
+    upload_path = File.join('photonic', current_user.username, uid_file )
 
     File.open(uid_path,"wb") do |file|
       file.puts img
     end
 
-    bucket = gcp_cloud_storage(bucket_name)
-    file = bucket.create_file uid_path, upload_path
+    begin
+      bucket = gcp_cloud_storage(bucket_name)
+      file = bucket.create_file uid_path, upload_path
+    rescue => exception
+      puts "[ERROR] - uanble to upload to cloud storage with error: #{e}"
+      flash.now[:warning] = 'Unable to upload your photos'
+      redirect_to '/'
+    end
 
-    queue = gcp_pub_sub("photonic")
+    begin
+    queue = gcp_pub_sub(pub_sub)
     que = queue.publish uid
+    rescue => e
+      puts "[ERROR] - uanble to pushlish with error: #{e}"
+      flash.now[:warning] = 'Unable to publish to queue'
+      redirect_to '/'
+    end
 
     photo = Photo.new()
     photo.uuid = uid
@@ -64,13 +74,8 @@ class IndexController < ApplicationController
     if photo.save
       flash[:success] = "Successfully queued job with id: #{uid}"
     else
-      flash[:warning] = 'Unable to queue your job.'
+      flash[:warning] = 'Failed trying to update the database!'
     end
     redirect_to '/'
-    # puts "Uploaded #{img} as #{file.name} in bucket #{bucket_name}"
   end
-  # private
-  # def index_params
-  #   params.require(:index).permit(:image)
-  # end
 end

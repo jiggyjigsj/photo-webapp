@@ -43,10 +43,10 @@ def gcp_cloud_storage(bucket)
 end
 
 def main
+  pub_sub = ENV.fetch("GCP_CLOUD_PUB_SUB")
+  queue = gcp_pub_sub(pub_sub)
 
-  queue = gcp_pub_sub('photonic')
-
-  subs = queue.subscription 'photonic-sub'
+  subs = queue.subscription "#{pub_sub}-sub"
 
   subscriber = subs.listen do |received_message|
     # process message
