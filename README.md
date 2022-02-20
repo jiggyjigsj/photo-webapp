@@ -1,4 +1,4 @@
-# photo-webapp
+# photo-webapp [![photonic-publish](https://github.com/jiggyjigsj/photo-webapp/actions/workflows/docker-photos-publish.yml/badge.svg?branch=main)](https://github.com/jiggyjigsj/photo-webapp/actions/workflows/docker-photos-publish.yml)
 Ruby on rails webapp for Photos
 
 docker build . -t photos
